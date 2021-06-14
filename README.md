@@ -79,3 +79,50 @@ function App() {
 export default App;
 
 ```
+
+## 3.useReservedFunc
+
+保留函数引用的hook
+
+```TypeScript
+import React, { useState, useCallback, useRef } from 'react';
+import { message } from 'antd';
+import hooks from '../hooks'
+
+export default () => {
+  const [count, setCount] = useState(0);
+
+  const showCountPersistFn = hooks.useReservedFunc(() => {
+    message.info(`Current count is ${count}`);
+  });
+
+  const showCountCommon = useCallback(() => {
+    message.info(`Current count is ${count}`);
+  }, [count]);
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => {
+          setCount((c) => c + 1);
+        }}
+      >
+        Add Count
+      </button>
+      <p>You can click the button to see the number of sub-component renderings</p>
+
+      <div style={{ marginTop: 32 }}>
+        <h4>Component with persist function:</h4>
+        {/* use persist function, ExpensiveTree component will only render once */}
+        <ExpensiveTree showCount={showCountPersistFn} />
+      </div>
+      <div style={{ marginTop: 32 }}>
+        <h4>Component without persist function:</h4>
+        {/* without persist function, ExpensiveTree component will re-render on state change */}
+        <ExpensiveTree showCount={showCountCommon} />
+      </div>
+    </>
+  );
+};
+```
