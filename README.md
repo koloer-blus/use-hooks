@@ -2,9 +2,9 @@
 
 ---
 
-## useInterval
+## 1.useInterval
 
-食用方法
+interval（定时触发的hooks）
 
 ```TypeScript
 import React, { ReactEventHandler, useState } from 'react'
@@ -39,5 +39,43 @@ function App() {
 
 export default App;
 
+
+```
+
+## 2.useMergeState
+
+处理对象类型的state
+
+
+```TypeScript
+import React, { ReactEventHandler, useState } from 'react'
+import './App.css'
+import hooks from '../hooks'
+
+function App() {
+  const [state, setState] = hooks.useMergeState({
+    hello: '',
+    count: 0,
+  });
+
+  return (
+    <div>
+      <pre>{JSON.stringify(state, null, 2)}</pre>
+      <p>
+        <button type="button" onClick={() => setState({ hello: 'world' })}>
+          set hello
+        </button>
+        <button type="button" onClick={() => setState({ foo: 'bar' })} style={{ margin: '0 8px' }}>
+          set foo
+        </button>
+        <button type="button" onClick={() => setState((prev) => ({ count: prev.count + 1 }))}>
+          count + 1
+        </button>
+      </p>
+    </div>
+  );
+}
+
+export default App;
 
 ```
