@@ -1,0 +1,10 @@
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+src/
+index.html
+*.json
+vite.config.ts
+yarn.lock
