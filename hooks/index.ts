@@ -5,6 +5,8 @@ import useQueryParams  from './useQueryParams';
 import useElementHeight from './useElemetHeight';
 import useForceUpdate from './useForceUpdate';
 import useElementInView from './useElementInView';
+import useComputedState from './useComputedState';
+
 export default {
   useInterval,
   useMergeState,
@@ -12,5 +14,6 @@ export default {
   useElementHeight,
   useForceUpdate,
   useQueryParams,
-  useElementInView
+  useElementInView,
+  useComputedState
 };
