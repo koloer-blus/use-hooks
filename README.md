@@ -131,7 +131,7 @@ export default () => {
 
 判断当前组件是否进入视口
 
-```
+```TS
 import { useRef, useEffect } from 'react';
 
 type IOptions = {
@@ -177,4 +177,73 @@ const useElementInView = (
 };
 
 export default useElementInView;
+```
+
+## 5.useQueryParams
+
+获取url参数
+
+```TS
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import queryString from 'query-string';
+
+export default function useQueryParams<T extends any>(option: queryString.ParseOptions = {}) {
+  const { search } = useLocation();
+  const ret = queryString.parse(search, { arrayFormat: 'comma', ...option }) as unknown as T;
+  const [state, setState] = useState<T>(ret);
+
+  useEffect(() => {
+    if (!_.isEqual(state, ret)) {
+      setState(ret);
+    }
+  }, [search]);
+
+  return state;
+}
+```
+
+## 6.useForceUpdate
+
+强制更新
+
+```TS
+import { useState } from 'react';
+
+const useForceUpdate = () => {
+  const [, setFlag] = useState<number>(0);
+
+  return () => setFlag(v => v + 1);
+};
+
+export default useForceUpdate;
+```
+
+## 7.useElementHeight
+
+获取元素高度
+
+```TS
+import { useLayoutEffect } from 'react';
+import useForceUpdate from './use-force-update';
+
+const useElementHeight = (selector: string) => {
+  const forceUpdate = useForceUpdate();
+
+  const element = document.querySelector(selector);
+
+  useLayoutEffect(() => {
+    if (element) {
+      const observer = new MutationObserver(() => forceUpdate());
+      observer.observe(element, { childList: true });
+      return () => observer.disconnect();
+    }
+  }, []);
+
+  if (!element) return 0;
+
+  return element.clientHeight;
+};
+
+export default useElementHeight;
 ```
