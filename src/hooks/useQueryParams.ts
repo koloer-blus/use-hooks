@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import queryString from 'query-string';
+import * as _ from 'lodash';
 
 export default function useQueryParams<T extends any>(option: queryString.ParseOptions = {}) {
-  const { search } = useLocation();
+  const { search } = window.location;
   const ret = queryString.parse(search, { arrayFormat: 'comma', ...option }) as unknown as T;
   const [state, setState] = useState<T>(ret);
 

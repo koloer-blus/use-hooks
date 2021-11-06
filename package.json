@@ -7,10 +7,15 @@
         "serve": "vite preview"
     },
     "dependencies": {
+        "@types/query-string": "^6.3.0",
+        "dayjs": "^1.10.7",
+        "lodash": "^4.17.21",
+        "query-string": "^7.0.1",
         "react": "^17.0.0",
         "react-dom": "^17.0.0"
     },
     "devDependencies": {
+        "@types/lodash": "^4.14.176",
         "@types/react": "^17.0.0",
         "@types/react-dom": "^17.0.0",
         "@vitejs/plugin-react": "^1.0.0",
