@@ -374,3 +374,89 @@ const useLazyLoadImg = (imgElList: HTMLImageElement[]) => {
 
 export default useLazyLoadImg;
 ```
+
+## 12. useMap
+
+```TS
+import { useMemo, useState, useCallback } from 'react';
+
+function useMap<K, T>(initialValue?: Iterable<readonly [K, T]>) {
+  const initialMap = useMemo<Map<K, T>>(
+    () => (initialValue === undefined ? new Map() : new Map(initialValue)) as Map<K, T>,
+    [],
+  );
+  const [map, setMap] = useState(initialMap);
+
+  const stableActions = useMemo(
+    () => ({
+      set: (key: K, entry: T) => {
+        setMap((prev) => {
+          const temp = new Map(prev);
+          temp.set(key, entry);
+          return temp;
+        });
+      },
+      setAll: (newMap: Iterable<readonly [K, T]>) => {
+        setMap(new Map(newMap));
+      },
+      remove: (key: K) => {
+        setMap((prev) => {
+          const temp = new Map(prev);
+          temp.delete(key);
+          return temp;
+        });
+      },
+      reset: () => setMap(initialMap),
+    }),
+    [setMap, initialMap],
+  );
+
+  const utils = {
+    get: useCallback((key) => map.get(key), [map]),
+    ...stableActions,
+  };
+
+  return [map, utils] as const;
+}
+
+export default useMap;
+```
+
+## 13. useSet
+
+```TS
+import { useState, useMemo, useCallback } from 'react';
+
+function useSet<K>(initialValue?: Iterable<K>) {
+  const initialSet = useMemo<Set<K>>(
+    () => (initialValue === undefined ? new Set() : new Set(initialValue) as Set<K>),
+    []
+  );
+  const [set, setSet] = useState(initialSet);
+
+  const stableActions = useMemo(() => ({
+    add: (key: K) => {
+      setSet((preSet) => {
+        const temp = new Set(preSet);
+        temp.add(key);
+        return temp;
+      });
+    },
+    remove: (key: K) => {
+      setSet((prevSet) => {
+        const temp = new Set(prevSet);
+        temp.delete(key);
+        return temp;
+      })
+    },
+    reset: () => setSet(initialSet)
+  }), [setSet, initialSet]);
+  const utils = {
+    has: useCallback((key: K) => set.has(key), [set]),
+    ...stableActions,
+  };
+  return [set, utils] as const;
+}
+
+export default useSet;
+```

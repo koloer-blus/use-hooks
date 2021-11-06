@@ -8,6 +8,8 @@ import useElementInView from './useElementInView';
 import useComputedState from './useComputedState';
 import useLazyLoadImg from './useLazyLoadImg';
 import usePreLoadImg from './usePreLoadImg';
+import useSet from './useSet';
+import useMap from './useMap';
 
 export default {
   useInterval,
@@ -19,5 +21,7 @@ export default {
   useElementInView,
   useComputedState,
   usePreLoadImg,
-  useLazyLoadImg
+  useLazyLoadImg,
+  useSet,
+  useMap
 };
