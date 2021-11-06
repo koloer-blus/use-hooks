@@ -11,7 +11,7 @@ type IOptions = {
  * @param options
  */
 const useElementInView = (
-  elementIds: string[],
+  elementIds: string[] | HTMLElement[],
   callback: (entry: IntersectionObserverEntry) => void,
   options: IOptions) => {
   const { threshold = [0, 0.5], effectDeps = [] } = options;
@@ -27,8 +27,9 @@ const useElementInView = (
     }, {
       threshold,
     });
-    elementIds.forEach((elId) => {
-      const element = document.getElementById(elId);
+    elementIds.forEach((elId: any) => {
+      // 支持传入的domRef
+      const element = typeof elId === 'string' ? document.getElementById(elId) : elId;
       if (element && element instanceof Element) {
         io.current && io.current.observe(element);
       } else {

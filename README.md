@@ -355,3 +355,22 @@ const usePreLoadImg = (src: string) => {
 
 export default usePreLoadImg;
 ```
+
+## 11. 图片懒加载
+
+```TS
+import useElementInView from './useElementInView';
+
+const lazyLoadImg = (el: any) => {
+  const { target } = el;
+  target.src = target.dataset.src;
+}
+
+const useLazyLoadImg = (imgElList: HTMLImageElement[]) => {
+  useElementInView(imgElList, lazyLoadImg, {
+    threshold: [1]
+  })
+};
+
+export default useLazyLoadImg;
+```
