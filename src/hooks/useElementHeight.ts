@@ -1,5 +1,5 @@
 import { useLayoutEffect } from 'react';
-import useForceUpdate from './use-force-update';
+import useForceUpdate from './useForceUpdate';
 
 const useElementHeight = (selector: string) => {
   const forceUpdate = useForceUpdate();

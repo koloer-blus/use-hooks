@@ -2,10 +2,12 @@ import useInterval from './useInterval';
 import useMergeState from './useMergeState';
 import useReservedFunc from './useReservedFunc';
 import useQueryParams  from './useQueryParams';
-import useElementHeight from './useElemetHeight';
+import useElementHeight from './useElementHeight';
 import useForceUpdate from './useForceUpdate';
 import useElementInView from './useElementInView';
 import useComputedState from './useComputedState';
+import useLazyLoadImg from './useLazyLoadImg';
+import usePreLoadImg from './usePreLoadImg';
 
 export default {
   useInterval,
@@ -15,5 +17,7 @@ export default {
   useForceUpdate,
   useQueryParams,
   useElementInView,
-  useComputedState
+  useComputedState,
+  usePreLoadImg,
+  useLazyLoadImg
 };
