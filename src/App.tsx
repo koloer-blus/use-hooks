@@ -4,7 +4,7 @@ function App() {
   const [count, setCount] = useState(0)
   const ref = useRef();
   return (
-    <div className="App">
+    <div  className="App">
       <header className="App-header">
         <p>Hello Vite + React!</p>
         <p>
