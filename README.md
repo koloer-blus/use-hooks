@@ -1,6 +1,12 @@
 # use-hooks
 
+> 用来收集和实现一些好用的 `hooks` 供对于`hooks`有强烈开发需求的兄弟使用
+
+> 📌 本项目采用 `Vite` 构建的 `React-TS` 项目于模板，使用过程中请确保项目的版本支持 `React Hooks` 和 `TypeScript`
 ---
+
+收录 Hooks 来源， `ahooks`、`大佬们的博客`、`优秀的仓库代码`、`本人开发使用的hooks`
+
 
 ## 1.useInterval
 
